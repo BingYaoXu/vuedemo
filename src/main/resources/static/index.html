@@ -3,37 +3,69 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
+
     <script src="https://cdn.staticfile.org/vue/2.6.10/vue.min.js"></script>
+    <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
     <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
 </head>
 
 <body>
     <div id="app">
-        <button onclick="hello()" >{{buttonName}}</button>
+        <button @click="toLogin">跳转到登录页面</button>
+        <button @click="toHome">跳转到主页</button>
     </div>
-    <script >
-        // window.location.href='./login.html';
-        
-        var hello=function(){
-            $.ajax({url:'/hello',success:function(data){
-                vue.buttonName=data;
-                // window.location.href='./login.html';
-                $("#app").load('./login.html');
-            }})
-        }
-
-        var vue = new Vue({
-            el:"#app",
-            data:{
-                buttonName:"测试一下请求发送"
-            },
-            methods:{
-                test:function(){
-                    alert('test')
-                }
-            }
-        })
-    </script>
 </body>
+
+<script >
+
+
+    var vue = new Vue({
+        el:"#app",
+        data:{
+
+        },
+        methods:{
+            getUserInfo:function () {
+                console.log( window.localStorage.getItem("user"))
+                if(!window.localStorage.getItem("user")){
+                    $.ajax({
+                        type:'get',
+                        url:"/getUserInfo",
+                        dataType:"json",
+                        success:function(result){
+                            window.localStorage.setItem("user",result.info);
+                            console.log(result)
+                        },
+                        error:function (err) {
+                            alert(err)
+                        }
+                    })
+                    // $.get("/getUserInfo",function (result) {
+                    //     window.localStorage.setItem("user",result.data.info);
+                    // })
+                }else{
+                    redirect("./login.html")
+                }
+
+            },
+            toLogin:function(){
+                window.location.href="./login.html";
+            },
+            toHome:function(){
+                window.location.href="./html/home.html"
+            }
+        }
+    })
+
+
+
+    var loadPage=function(url){
+        $("#app").load(url);
+    }
+    var redirect=function(url){
+        window.location.href=url;
+    }
+    // window.location.href='./login.html';
+    localStorage.setItem("key","value");
+</script>
 </html>

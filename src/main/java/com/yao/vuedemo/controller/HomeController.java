@@ -1,5 +1,6 @@
 package com.yao.vuedemo.controller;
 
+import com.yao.vuedemo.ResultBean;
 import com.yao.vuedemo.dao.UserDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -25,10 +26,16 @@ public class HomeController {
     public List findByName(String name){
         return userDao.findByName(name);
     }
-//    @RequestMapping("/login.html")
-//    public String toIndex(){
-//        return "login";
-//    }
+    @ResponseBody
+    @RequestMapping("/login")
+    public String login(String userName,String password){
+        return userName+"登录成功";
+    }
 
+    @RequestMapping("/getUserInfo")
+    @ResponseBody
+    public ResultBean getUserInfo(){
+        return new ResultBean("用户");
+    }
 
 }

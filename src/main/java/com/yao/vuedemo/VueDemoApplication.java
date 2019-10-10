@@ -8,6 +8,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class VueDemoApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(VueDemoApplication.class);
+        SpringApplication.run(VueDemoApplication.class,args);
     }
 }
