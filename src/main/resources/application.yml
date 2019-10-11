@@ -4,7 +4,7 @@ spring:
   datasource:
     url: jdbc:mysql://localhost:3306/vuedemo?serverTimezone=UTC
     username: root
-    password: kandy123
+    password: root
     type: com.alibaba.druid.pool.DruidDataSource
   application:
     name: vue-demo
