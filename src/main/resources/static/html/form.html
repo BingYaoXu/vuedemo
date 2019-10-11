@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>bootstrap表单demo</title>
+</head>
+<body id="app">
+    <form role="form" id="form">
+        <div class="form-group">
+            <label for="name">名称：</label>
+            <input type="text"  id="请输入名称" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label for="file">上传文件:</label>
+            <input type="file"  id="file" v-model="file">
+        </div>
+        <!-- 内敛复选框 -->
+        <div class="form-group">
+                <label class="checkbox-inline">
+                        <input type="checkbox" id="inlineCheckbox2" value="option2"> 选项 2
+                    </label>
+                    <label class="checkbox-inline">
+                        <input type="checkbox" id="inlineCheckbox3" value="option3"> 选项 3
+                    </label>
+                    <label class="radio-inline">
+                        <input type="radio" name="optionsRadiosinline" id="optionsRadios3" value="option1" checked> 选项 1
+                    </label>
+                    <label class="radio-inline">
+                        <input type="radio" name="optionsRadiosinline" id="optionsRadios4"  value="option2"> 选项 2
+                </label>
+        </div>
+        <!-- 上传 -->
+        <button type="button" @click="submit">上传表单</button>
+    </form>
+</body>
+<script>
+    var vue=new Vue({
+        el:"#app",
+        data:{file:null},
+        methods:{
+            submit:function(){
+                // alert("231")
+                // $.post(
+                //     "/uploadFile",
+                //     this.file,
+                //     function(data){alert(data)}
+                // )
+            var formData = new FormData();
+			formData.append('multipartFile', $('#file')[0].files[0]);
+
+            console.log($('#file'))
+
+            $.ajax({
+                    type: 'post',
+                    url: "/uploadFile",
+                    data: formData,
+                    //必须false才会自动加上正确的Content-Type
+                    contentType: false,
+                    //必须false才会避开jQuery对 formdata 的默认处理
+				    //XMLHttpRequest会对 formdata 进行正确的处理
+                    processData: false,
+                    dataType:'json'
+                }).success(function (data) {
+                    alert(data);
+                }).error(function () {
+                    alert("上传失败");
+                });
+  
+            }
+        }
+    })
+
+</script>
+
+</html>
