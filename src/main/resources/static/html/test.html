@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        body,html {
+            margin: 0;
+            height: 100%;
+        }
+        .header{
+            height: 20%;
+            background: pink;
+        }
+        .content {
+            height: 50%;
+            overflow: hidden;
+        }
+        .content .nav {
+            float: left;
+            height: 100%;
+            width: 20%;
+            background: skyblue;
+        }
+        .content .main {
+            float: left;
+            height: 100%;
+            width: 80%;
+            background: green;
+        }
+        .footer {
+            height: 30%;
+            background: orange;
+        }
+        .wrap {
+            position: relative;
+            width: 100px;
+            height: 100px;
+            border: 1px solid red;
+            border-radius: 9px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="header"></div>    
+    <div class="content">
+        <div class="nav">
+            <ul>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+            </ul>
+        </div>
+        <div class="main"></div>
+    </div>
+    <div class="footer">
+        <p style="text-indent:-999em;">this  a test page</p>
+       <div id="wrap" class="wrap">
+            上传图片
+            <input id="file" type="file" style="position: absolute;left: -999px;">
+       </div>
+    </div>
+    <script>
+        var oWrap = document.getElementById('wrap');
+        var oFile = document.getElementById('file');
+        oWrap.onclick = function(){
+            oFile.click()
+        }
+    </script>
+</body>
+</html>
